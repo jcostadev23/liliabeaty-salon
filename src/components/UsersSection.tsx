@@ -4,6 +4,7 @@ import { useUsersFilter } from "@/hooks/useUsersFilter";
 import { useUsersContext } from "@/contexts/UsersContext";
 import { User, RoleFilter } from "@/app/types";
 import Label from "./Label";
+import UserCard from "./UserCard";
 
 interface UsersSectionProps {
   onEditUser: (user: User) => void;
@@ -87,38 +88,13 @@ const UsersSection = ({ onEditUser }: UsersSectionProps) => {
           <p className="text-sm text-zinc-500">Sem utilizadores.</p>
         ) : (
           users.map((user) => (
-            <div
+            <UserCard
               key={user.id}
-              className="flex items-start justify-between gap-4 rounded-2xl border border-zinc-100 bg-zinc-50 p-4"
-            >
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-zinc-900">
-                  {user.name}
-                </p>
-                <p className="text-xs text-zinc-500">{user.email}</p>
-                <p className="text-xs text-zinc-500">
-                  {user.phoneNumber ?? "Sem telefone"}
-                </p>
-                <p className="text-[11px] text-zinc-400">{user.role}</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <button
-                  type="button"
-                  onClick={() => onEditUser(user)}
-                  className="rounded-full border border-zinc-200 px-3 py-1 text-xs hover:bg-zinc-100"
-                >
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  disabled={loading}
-                  onClick={() => handleDelete(user.id)}
-                  className="rounded-full border border-red-200 px-3 py-1 text-xs text-red-600 hover:bg-red-50 disabled:opacity-50"
-                >
-                  Remover
-                </button>
-              </div>
-            </div>
+              user={user}
+              onEditUser={onEditUser}
+              handleDelete={handleDelete}
+              loading={loading}
+            />
           ))
         )}
       </div>
