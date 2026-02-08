@@ -4,6 +4,7 @@ import { useMemo, useEffect } from "react";
 import { useUserForm } from "@/hooks/useUserForm";
 import { useUsersContext } from "@/contexts/UsersContext";
 import { User } from "@/app/types";
+import Label from "./Label";
 
 interface UserFormProps {
   editingUser?: User | null;
@@ -46,9 +47,7 @@ const UserForm = ({ editingUser, onReset }: UserFormProps) => {
       </h2>
       <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
         <div>
-          <label className="text-sm font-medium text-zinc-700" htmlFor="name">
-            Nome
-          </label>
+          <Label htmlFor="name">Name</Label>
           <input
             id="name"
             value={form.name}
@@ -58,9 +57,7 @@ const UserForm = ({ editingUser, onReset }: UserFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-zinc-700" htmlFor="email">
-            Email
-          </label>
+          <Label htmlFor="email">Email</Label>
           <input
             id="email"
             type="email"
@@ -71,12 +68,7 @@ const UserForm = ({ editingUser, onReset }: UserFormProps) => {
           />
         </div>
         <div>
-          <label
-            className="text-sm font-medium text-zinc-700"
-            htmlFor="phoneNumber"
-          >
-            Telemovel
-          </label>
+          <Label htmlFor="phoneNumber">PhoneNumber</Label>
           <input
             id="phoneNumber"
             value={form.phoneNumber}
@@ -85,9 +77,7 @@ const UserForm = ({ editingUser, onReset }: UserFormProps) => {
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-zinc-700" htmlFor="role">
-            Tipo de utilizador
-          </label>
+          <Label htmlFor="role">Role</Label>
           <select
             id="role"
             value={form.role}
@@ -101,12 +91,7 @@ const UserForm = ({ editingUser, onReset }: UserFormProps) => {
           </select>
         </div>
         <div>
-          <label
-            className="text-sm font-medium text-zinc-700"
-            htmlFor="password"
-          >
-            Password
-          </label>
+          <Label htmlFor="password">Password</Label>
           <input
             id="password"
             type="password"

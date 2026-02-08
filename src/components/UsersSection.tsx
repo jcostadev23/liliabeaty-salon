@@ -3,6 +3,7 @@
 import { useUsersFilter } from "@/hooks/useUsersFilter";
 import { useUsersContext } from "@/contexts/UsersContext";
 import { User, RoleFilter } from "@/app/types";
+import Label from "./Label";
 
 interface UsersSectionProps {
   onEditUser: (user: User) => void;
@@ -65,7 +66,7 @@ const UsersSection = ({ onEditUser }: UsersSectionProps) => {
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between">
-        <label className="text-xs text-zinc-500">
+        <Label>
           Ordenar por
           <select
             value={order}
@@ -79,7 +80,7 @@ const UsersSection = ({ onEditUser }: UsersSectionProps) => {
             <option value="email_asc">Email A-Z</option>
             <option value="email_desc">Email Z-A</option>
           </select>
-        </label>
+        </Label>
       </div>
       <div className="mt-6 space-y-4">
         {users.length === 0 ? (
