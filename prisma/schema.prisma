@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum AuditAction {
+  USER_CREATE
+  USER_UPDATE
+  USER_DELETE
+}
+
+model User {
+  id                String     @id @default(cuid())
+  name              String
+  email             String     @unique
+  phoneNumber       String?    @unique
+  passwordHash      String
+  role              Role       @default(USER)
+  resetToken        String?    @unique
+  resetTokenExpires DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  auditLogs         AuditLog[] @relation("ActorLogs")
+  targetLogs        AuditLog[] @relation("TargetLogs")
+}
+
+model AuditLog {
+  id           String      @id @default(cuid())
+  actorId      String
+  actorEmail   String
+  action       AuditAction
+  targetUserId String?
+  details      String?
+  createdAt    DateTime    @default(now())
+
+  actor User @relation("ActorLogs", fields: [actorId], references: [id])
+  target User? @relation("TargetLogs", fields: [targetUserId], references: [id])
+
+  @@index([actorId])
+  @@index([targetUserId])
+  @@index([createdAt])
+}

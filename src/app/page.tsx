@@ -1,27 +1,12 @@
-import { cookies } from "next/headers";
-
 import { LogoutButton } from "@/components/LogoutButton";
-import { verifyAuthToken } from "@/lib/auth";
-// import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
-  // const cookieStore = await cookies();
-  // const token = cookieStore.get("auth_token")?.value;
-  // const payload = token ? await verifyAuthToken(token) : null;
-  // const user = payload
-  //   ? await prisma.user.findUnique({
-  //       where: { id: payload.sub },
-  //       select: { name: true, email: true, phoneNumber: true, createdAt: true },
-  //     })
-  //   : null;
   const user = {
     name: "Joao Costa",
     email: "joao.costa@example.com",
     phoneNumber: "123456789",
     createdAt: new Date(),
   };
-
-  console.log("home");
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 px-6">
